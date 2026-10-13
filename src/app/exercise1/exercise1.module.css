@@ -1,0 +1,11 @@
+.main {
+  width: 100%;
+  max-width: 640px;
+  margin-inline: auto;
+  padding: var(--space-6) var(--space-4);
+}
+
+.title {
+  margin-bottom: var(--space-6);
+  font-size: 1.5rem;
+}
