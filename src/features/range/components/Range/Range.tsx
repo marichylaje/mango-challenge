@@ -85,7 +85,7 @@ export function Range({
       ratio={valueToRatio(value[handle], bounds)}
       value={value[handle]}
       ariaMin={controls[handle].limits.lo}
-      ariaMax={controls[handle].limits.hi}
+      ariaMax={Math.max(controls[handle].limits.lo, controls[handle].limits.hi)}
       label={HANDLE_LABELS[handle]}
       valueText={String(value[handle])}
       isDragging={controls[handle].isDragging}

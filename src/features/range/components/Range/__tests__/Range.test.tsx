@@ -223,6 +223,7 @@ describe("Range disabled state", () => {
     }
     expect(fromInput).toBeDisabled();
     expect(toInput).toBeDisabled();
+    expect(fromHandle).toHaveAttribute("aria-valuemax", "14");
     fireEvent.pointerDown(fromHandle, { pointerId: 1, clientX: 100 });
     fireEvent.pointerMove(fromHandle, { pointerId: 1, clientX: 300 });
     fireEvent.keyDown(fromHandle, { key: "ArrowRight" });
