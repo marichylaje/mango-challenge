@@ -5,9 +5,11 @@ import {
   clientXToValue,
   getHandleLimits,
   getKeyboardDelta,
+  getTopHandle,
   isDegenerate,
   moveHandle,
   normalizeBounds,
+  resolveConstraints,
   sanitizeRangeValue,
   snapToStep,
   valueToRatio,
@@ -181,6 +183,31 @@ describe("sanitizeRangeValue", () => {
       from: 0,
       to: 100,
     });
+  });
+});
+
+describe("resolveConstraints", () => {
+  it("defaults step and minGap", () => {
+    expect(resolveConstraints()).toEqual({ step: 1, minGap: 1 });
+  });
+  it("derives minGap from step", () => {
+    expect(resolveConstraints({ step: 5 })).toEqual({ step: 5, minGap: 5 });
+  });
+  it("respects explicit values", () => {
+    expect(resolveConstraints({ step: 5, minGap: 10 })).toEqual({ step: 5, minGap: 10 });
+  });
+});
+
+describe("getTopHandle", () => {
+  it("raises from when to sits at max", () => {
+    expect(getTopHandle("to", { from: 99, to: 100 }, bounds)).toBe("from");
+  });
+  it("raises to when from sits at min", () => {
+    expect(getTopHandle("from", { from: 0, to: 1 }, bounds)).toBe("to");
+  });
+  it("keeps the last active handle otherwise", () => {
+    expect(getTopHandle("from", { from: 20, to: 40 }, bounds)).toBe("from");
+    expect(getTopHandle("to", { from: 0, to: 100 }, bounds)).toBe("to");
   });
 });
 

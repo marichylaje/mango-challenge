@@ -1,0 +1,12 @@
+.root {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: var(--space-4);
+  min-height: var(--range-container-height);
+}
+
+.root[data-dragging="true"] {
+  cursor: grabbing;
+  user-select: none;
+}

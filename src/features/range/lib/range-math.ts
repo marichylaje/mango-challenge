@@ -1,4 +1,4 @@
-import { LARGE_STEP_MULTIPLIER } from "../constants";
+import { DEFAULT_STEP, LARGE_STEP_MULTIPLIER } from "../constants";
 import type {
   HandleLimits,
   RangeBounds,
@@ -97,6 +97,26 @@ export function sanitizeRangeValue(
   const from = clamp(snap(lowest), bounds.min, bounds.max - c.minGap);
   const to = clamp(snap(highest), from + c.minGap, bounds.max);
   return { from, to };
+}
+
+export function resolveConstraints(
+  partial: Partial<RangeConstraints> = {},
+): RangeConstraints {
+  const step = partial.step ?? DEFAULT_STEP;
+  return { step, minGap: partial.minGap ?? step };
+}
+
+/** Handle rendered on top: the one that can still move when the other sits on an extreme. */
+export function getTopHandle(
+  lastActive: RangeHandleId,
+  value: RangeValue,
+  bounds: RangeBounds,
+): RangeHandleId {
+  const toAtMax = value.to === bounds.max;
+  const fromAtMin = value.from === bounds.min;
+  if (toAtMax && !fromAtMin) return "from";
+  if (fromAtMin && !toAtMax) return "to";
+  return lastActive;
 }
 
 export function getKeyboardDelta(

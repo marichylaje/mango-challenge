@@ -28,6 +28,7 @@
   --range-input-width: 72px;
   --range-input-height: 36px;
   --range-container-height: 64px;
+  --range-hit-size: 44px;
 
   --transition-fast: 120ms ease;
 }

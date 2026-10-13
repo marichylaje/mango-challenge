@@ -1,0 +1,26 @@
+.track {
+  position: relative;
+  height: var(--range-hit-size);
+  margin-inline: calc(var(--range-handle-size-hover) / 2);
+}
+
+.rail,
+.active {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: var(--range-track-height);
+  margin-top: calc(var(--range-track-height) / -2);
+  border-radius: var(--radius-pill);
+}
+
+.rail {
+  background: var(--color-track);
+}
+
+.active {
+  background: var(--color-track-active);
+  transform-origin: left center;
+  transform: translateX(calc(var(--from-ratio) * 100%))
+    scaleX(calc(var(--to-ratio) - var(--from-ratio)));
+}

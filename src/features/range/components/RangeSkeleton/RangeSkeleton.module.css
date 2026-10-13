@@ -1,0 +1,73 @@
+.root {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  column-gap: var(--space-4);
+  min-height: var(--range-container-height);
+}
+
+.block {
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton) 25%,
+    var(--color-skeleton-shimmer) 50%,
+    var(--color-skeleton) 75%
+  );
+  background-size: 300% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+
+.input {
+  width: var(--range-input-width);
+  height: var(--range-input-height);
+  border-radius: var(--radius-sm);
+}
+
+.track {
+  position: relative;
+  height: var(--range-hit-size);
+  margin-inline: calc(var(--range-handle-size-hover) / 2);
+}
+
+.rail {
+  position: absolute;
+  inset-inline: 0;
+  top: 50%;
+  height: var(--range-track-height);
+  margin-top: calc(var(--range-track-height) / -2);
+  border-radius: var(--radius-pill);
+}
+
+.handle {
+  position: absolute;
+  top: 50%;
+  width: var(--range-handle-size);
+  height: var(--range-handle-size);
+  border-radius: var(--radius-pill);
+  transform: translate(-50%, -50%);
+}
+
+.handleStart {
+  left: 0;
+}
+
+.handleEnd {
+  left: 100%;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 100% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .block {
+    animation: none;
+    background: var(--color-skeleton);
+  }
+}

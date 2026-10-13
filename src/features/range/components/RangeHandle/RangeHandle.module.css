@@ -1,0 +1,58 @@
+.handle {
+  --handle-border: 2px;
+  --handle-scale: 1;
+  /* Equals --range-handle-size-hover / --range-handle-size. */
+  --handle-scale-hover: 1.3;
+
+  position: absolute;
+  top: 50%;
+  left: calc(var(--ratio) * 100%);
+  z-index: 1;
+  width: var(--range-handle-size);
+  height: var(--range-handle-size);
+  border: var(--handle-border) solid var(--color-handle-border);
+  border-radius: var(--radius-pill);
+  background: var(--color-handle);
+  box-shadow: 0 1px 3px var(--color-shadow);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  transform: translate(-50%, -50%) scale(var(--handle-scale));
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Invisible pseudo-element that grows the pointer hit area to the touch target size. */
+.handle::before {
+  content: "";
+  position: absolute;
+  inset: calc(
+    (var(--range-handle-size) - var(--handle-border) * 2 - var(--range-hit-size)) / 2
+  );
+}
+
+.handle[data-active="true"] {
+  z-index: 2;
+}
+
+.handle:hover {
+  --handle-scale: var(--handle-scale-hover);
+}
+
+.handle[data-dragging="true"] {
+  --handle-scale: var(--handle-scale-hover);
+  cursor: grabbing;
+  box-shadow: 0 2px 8px var(--color-shadow);
+}
+
+.handle:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+.handle[aria-disabled="true"] {
+  --handle-scale: 1;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
