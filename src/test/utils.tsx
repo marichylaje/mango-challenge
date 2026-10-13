@@ -7,6 +7,8 @@ import {
 } from "@testing-library/react";
 import type { ReactElement, ReactNode } from "react";
 
+export { mockNextNavigation, navigationMockModule } from "./navigation-mock";
+
 export function createTestQueryClient(): QueryClient {
   return new QueryClient({
     defaultOptions: { queries: { retry: false, refetchOnWindowFocus: false } },
