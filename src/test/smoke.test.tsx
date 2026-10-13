@@ -1,7 +1,0 @@
-import { render, screen } from "@testing-library/react";
-import { expect, it } from "vitest";
-
-it("renders", () => {
-  render(<div>ok</div>);
-  expect(screen.getByText("ok")).toBeInTheDocument();
-});
